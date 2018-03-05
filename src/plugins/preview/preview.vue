@@ -92,8 +92,10 @@
                 let photoswipe = new PhotoSwipe(this.$el, UI, list, options)
                 this.photoswipe = photoswipe
                 photoswipe.listen('gettingData', function (index, item) {
-                    if (item.html === undefined && item.onloading === undefined && (item.w < 1 || item.h < 1)) { // unknown size
-                        item.onloading = true;
+                    console.log('gettingData')
+                    console.log(item)
+                    if (item.html === undefined && item.onloading === undefined && item.w < 1 || item.h < 1) { // unknown size
+                        console.log('update')
                         var img = new Image();
                         img.onload = function () { // will get size after load
                             item.w = this.width; // set image width
