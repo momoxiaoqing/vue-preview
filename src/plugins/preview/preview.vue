@@ -72,7 +72,7 @@
 
     export default {
         methods: {
-            open(index, list, params = {
+            open(index, list,id, params = {
                 captionEl: false,
                 fullscreenEl: false,
                 history: false,
@@ -82,7 +82,7 @@
                 let options = Object.assign({
                     index: index,
                     getThumbBoundsFn(index) {
-                        let thumbnail = document.querySelectorAll('.preview-img')[index]
+                        let thumbnail = document.querySelectorAll('.preview-img-'+id)[index]
                         let pageYScroll = window.pageYOffset || document.documentElement.scrollTop
                         let rect = thumbnail.getBoundingClientRect()
                         return {x: rect.left, y: rect.top + pageYScroll, w: rect.width}
@@ -92,8 +92,6 @@
                 let photoswipe = new PhotoSwipe(this.$el, UI, list, options)
                 this.photoswipe = photoswipe
                 photoswipe.listen('gettingData', function (index, item) {
-                    console.log('gettingData')
-                    console.log(item)
                     if (item.html === undefined && item.onloading === undefined && item.w < 1 || item.h < 1) { // unknown size
                         console.log('update')
                         var img = new Image();
